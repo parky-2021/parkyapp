@@ -22,16 +22,12 @@ class _LoginsheetState extends State<Loginsheet> {
   Future<void> authenticate(phonenumber) async {
     var url = Uri.parse("http://10.0.2.2:8080/api/authenticate_user");
 
-    try {
-      final response =
-          await http.post(url, body: json.encode({'mobile': phonenumber}));
-      final responsedata = json.decode(response.body);
+    final response =
+        await http.post(url, body: jsonEncode({'mobile': phonenumber}));
+    final responsedata = jsonDecode(response.body);
 
-      token = responsedata["token"];
-      print(token);
-    } catch (error) {
-      throw (error);
-    }
+    token = responsedata["token"];
+    print(token);
   }
 
   bool isloading = false;
